@@ -37,7 +37,5 @@ logs
 logs/*
 assets
 assets/*
-log
-log/*
 
 .DS_Store
