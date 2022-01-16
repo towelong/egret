@@ -1,7 +1,6 @@
 package validate
 
 import (
-	"fmt"
 	"github.com/gin-gonic/gin/binding"
 	cn "github.com/go-playground/locales/zh_Hans_CN"
 	ut "github.com/go-playground/universal-translator"
@@ -24,7 +23,6 @@ var _ binding.StructValidator = &DefaultValidator{}
 
 func init() {
 	binding.Validator = New()
-	fmt.Println("执行了Validator")
 }
 
 func New() *DefaultValidator {
