@@ -1,6 +1,7 @@
 package config
 
 import (
+	"errors"
 	"github.com/jinzhu/configor"
 	"os"
 )
@@ -30,7 +31,7 @@ func New(path string) (*Config, error) {
 	// configor	支持配置文件不存在, issues: https://github.com/jinzhu/configor/issues/20
 	// 为了兼容配置必须存在，需要手动判断
 	if _, err := os.Stat(path); err != nil {
-		return nil, err
+		return nil, errors.New("config is not found")
 	}
 	cfg := &Config{}
 	// 自动重载配置

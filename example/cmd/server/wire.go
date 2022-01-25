@@ -5,6 +5,7 @@ package main
 import (
 	"github.com/google/wire"
 	"github.com/towelong/egret"
+	"github.com/towelong/egret/example/internal/pkg/config"
 	"github.com/towelong/egret/example/internal/pkg/logger"
 	"github.com/towelong/egret/example/internal/repo"
 	"github.com/towelong/egret/example/internal/server"
@@ -12,7 +13,7 @@ import (
 	"github.com/towelong/egret/example/internal/usecase"
 )
 
-func initApp() *egret.App {
+func initApp(c *config.Config) *egret.App {
 	panic(
 		wire.Build(
 			repo.ProvideSet,

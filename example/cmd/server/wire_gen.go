@@ -7,6 +7,7 @@ package main
 
 import (
 	"github.com/towelong/egret"
+	"github.com/towelong/egret/example/internal/pkg/config"
 	"github.com/towelong/egret/example/internal/pkg/logger"
 	"github.com/towelong/egret/example/internal/repo"
 	"github.com/towelong/egret/example/internal/server"
@@ -16,12 +17,12 @@ import (
 
 // Injectors from wire.go:
 
-func initApp() *egret.App {
+func initApp(c *config.Config) *egret.App {
 	zapLogger := logger.New()
 	userRepo := repo.NewUserRepo(zapLogger)
 	userUsecase := usecase.NewUserUsecase(userRepo, zapLogger)
 	shopInterface := service.NewShopInterface(userUsecase, zapLogger)
 	engine := server.NewHttpServer(shopInterface, zapLogger)
-	app := newApp(engine)
+	app := newApp(c, engine)
 	return app
 }
