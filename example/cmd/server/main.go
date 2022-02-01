@@ -5,6 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/towelong/egret"
 	"github.com/towelong/egret/example/internal/pkg/config"
+	"github.com/towelong/egret/example/internal/pkg/logger"
 )
 
 var (
@@ -26,11 +27,12 @@ func newApp(c *config.Config, srv *gin.Engine) *egret.App {
 
 func main() {
 	flag.Parse()
+	l := logger.NewLogger()
 	c, err := config.New(configPath)
 	if err != nil {
 		panic(err)
 	}
-	app := initApp(c)
+	app := initApp(c, l)
 	if err := app.Run(); err != nil {
 		panic(err)
 	}

@@ -6,19 +6,19 @@ import (
 	"go.uber.org/zap"
 )
 
-var _ domain.UserRepo = (*UserRepo)(nil)
+var _ domain.UserRepo = (*userRepo)(nil)
 
-type UserRepo struct {
+type userRepo struct {
 	logger *zap.Logger
 }
 
 func NewUserRepo(logger *zap.Logger) domain.UserRepo {
-	return &UserRepo{
+	return &userRepo{
 		logger: logger,
 	}
 }
 
-func (u *UserRepo) GetUserById(ctx context.Context, id int64) (*domain.User, error) {
+func (u *userRepo) GetUserById(ctx context.Context, id int64) (*domain.User, error) {
 	u.logger.Info("Repo被用到了")
 	return &domain.User{
 		ID:   1,

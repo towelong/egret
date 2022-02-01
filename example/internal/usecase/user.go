@@ -6,20 +6,20 @@ import (
 	"go.uber.org/zap"
 )
 
-var _ domain.UserUsecase = (*UserUsecase)(nil)
+var _ domain.UserUsecase = (*userUsecase)(nil)
 
-type UserUsecase struct {
+type userUsecase struct {
 	userRepo domain.UserRepo
 	logger   *zap.Logger
 }
 
 func NewUserUsecase(userRepo domain.UserRepo, logger *zap.Logger) domain.UserUsecase {
-	return &UserUsecase{
+	return &userUsecase{
 		userRepo: userRepo,
 		logger:   logger,
 	}
 }
 
-func (u *UserUsecase) GetUserById(ctx context.Context, id int64) (*domain.User, error) {
+func (u *userUsecase) GetUserById(ctx context.Context, id int64) (*domain.User, error) {
 	return u.userRepo.GetUserById(ctx, id)
 }

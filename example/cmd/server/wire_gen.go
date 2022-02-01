@@ -8,21 +8,20 @@ package main
 import (
 	"github.com/towelong/egret"
 	"github.com/towelong/egret/example/internal/pkg/config"
-	"github.com/towelong/egret/example/internal/pkg/logger"
 	"github.com/towelong/egret/example/internal/repo"
 	"github.com/towelong/egret/example/internal/server"
 	"github.com/towelong/egret/example/internal/service"
 	"github.com/towelong/egret/example/internal/usecase"
+	"go.uber.org/zap"
 )
 
 // Injectors from wire.go:
 
-func initApp(c *config.Config) *egret.App {
-	zapLogger := logger.New()
-	userRepo := repo.NewUserRepo(zapLogger)
-	userUsecase := usecase.NewUserUsecase(userRepo, zapLogger)
-	shopInterface := service.NewShopInterface(userUsecase, zapLogger)
-	engine := server.NewHttpServer(shopInterface, zapLogger)
+func initApp(c *config.Config, l *zap.Logger) *egret.App {
+	userRepo := repo.NewUserRepo(l)
+	userUsecase := usecase.NewUserUsecase(userRepo, l)
+	shopInterface := service.NewShopInterface(userUsecase, l)
+	engine := server.NewHttpServer(shopInterface, l)
 	app := newApp(c, engine)
 	return app
 }
